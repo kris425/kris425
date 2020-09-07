@@ -370,6 +370,241 @@
 
 
   
+    <article id="post-cpp-resume" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/07/cpp-resume/">C++面试题</a>
+    </h1>
+  
+
+        
+        <a href="/2020/07/07/cpp-resume/" class="archive-article-date">
+  	<time datetime="2020-07-07T10:14:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="一、extern关键字作用"><a href="#一、extern关键字作用" class="headerlink" title="一、extern关键字作用"></a>一、extern关键字作用</h3><ol>
+<li>extern用在变量或者函数的声明前，用来说明“此变量/函数是在别处定义的，要在此处引用”。extern声明不是定义，即不分配存储空间。也就是说，在一个文件中定义了变量和函数， 在其他文件中要使用它们， 可以有两种方式：使用头文件，然后声明它们，然后其他文件去包含头文件；在其他文件中直接extern。</li>
+<li>extern C，如果程序员希望调用其他程序设计语言尤其是C 写的函数，那么调用函数时必须告诉编译器使用不同的要求，例如当这样的函数被调用时函数名或参数排列的顺序可能不同，无论是C++函数调用它还是用其他语言写的函数调用它，程序员用链接指示符告诉编译器该函数是用其他的程序设计语言编写的，链接指示符有两种形式既可以是单一语句形式也可以是复合语句形式<h3 id="二、static关键字作用"><a href="#二、static关键字作用" class="headerlink" title="二、static关键字作用"></a>二、static关键字作用</h3></li>
+<li>隐藏变量</li>
+</ol>
+<ul>
+<li>当两个文件中存在全局变量时，通过extern关键字可以引用不同文件中的变量。如果加入static关键字，全局变量的作用域在文件内，其他文件无法访问。利用这一特性可以在不同的文件中定义同名函数和同名变量，而不必担心命名冲突。static可以用作函数和变量的前缀，对于函数来讲，static的作用仅限于隐藏</li>
+</ul>
+<ol start="2">
+<li>静态全局变量</li>
+</ol>
+<ul>
+<li>具有全局作用域，如果程序包含多个文件的话，它作用于定义它的文件里，不能作用到其它文件里，即被static关键字修饰过的变量具有文件作用域。这样即使两个不同的源文件都定义了相同名字的静态全局变量，它们也是不同的变量。<br>静态全局变量在静态存储区分配空间，在程序刚开始运行时就完成初始化，也是唯一的一次初始化</li>
+</ul>
+<ol start="3">
+<li>默认初始化为0</li>
+<li>修饰普通函数</li>
+<li>修饰成员变量</li>
+</ol>
+<ul>
+<li>静态数据成员可以实现多个对象之间的数据共享，它是类的所有对象的共享成员，它在内存中只占一份空间，如果改变它的值，则各对象中这个数据成员的值都被改变</li>
+<li>静态数据成员是静态存储的，是在程序开始运行时被分配空间，到程序结束之后才释放，只要类中指定了静态数据成员，即使不定义对象，也会为静态数据成员分配空间</li>
+<li>静态数据成员可以被初始化，但是只能在类体外进行初始化，若未对静态数据成员赋初值，则编译器会自动为其初始化为0 </li>
+</ul>
+<ol start="6">
+<li>修饰成员函数</li>
+</ol>
+<ul>
+<li>类的静态成员函数是属于整个类而非类的对象，所以它没有this指针，这就导致了它仅能访问类的静态数据成员和静态成员函数</li>
+<li>不能将静态成员函数定义为虚函数<h3 id="三、volatile关键字"><a href="#三、volatile关键字" class="headerlink" title="三、volatile关键字"></a>三、volatile关键字</h3>volatile 关键字是一种类型修饰符，用它声明的类型变量表示可以被某些编译器未知的因素更改，比如：操作系统、硬件或者其它线程等。遇到这个关键字声明的变量，编译器对访问该变量的代码就不再进行优化，从而可以提供对特殊地址的稳定访问<h3 id="四、const"><a href="#四、const" class="headerlink" title="四、const"></a>四、const</h3></li>
+</ul>
+<ol>
+<li>修饰一个变量</li>
+<li>修饰全局变量</li>
+<li>修饰指针</li>
+<li>在函数形参中</li>
+<li>修饰成员变量</li>
+<li>修饰成员函数<h3 id="五、new与malloc的区别"><a href="#五、new与malloc的区别" class="headerlink" title="五、new与malloc的区别"></a>五、new与malloc的区别</h3></li>
+<li>new分配内存按照数据类型进行分配，malloc分配内存按照大小分配</li>
+<li>new不仅分配一段内存，而且会调用构造函数，但是malloc则不会</li>
+<li>new是一个操作符可以重载，malloc是一个库函数</li>
+<li>new返回的是指定对象的指针，而malloc返回的是void*，因此malloc的返回值一般都需要进行类型转化</li>
+<li>new如果分配失败了会抛出bad_alloc的异常，而malloc失败了会返回NULL<h3 id="六、多态与虚函数表vbtl"><a href="#六、多态与虚函数表vbtl" class="headerlink" title="六、多态与虚函数表vbtl"></a>六、多态与虚函数表vbtl</h3></li>
+<li>动态多态实现有几个条件</li>
+</ol>
+<ul>
+<li>虚函数</li>
+<li>一个基类的指针或引用指向派生类的对象</li>
+</ul>
+<ol start="2">
+<li>原理</li>
+</ol>
+<ul>
+<li><p>基类指针在调用成员函数(虚函数)时，就会去查找该对象的虚函数表。虚函数表的地址vptr在每个对象的首地址。查找该虚函数表中该函数的指针进行调用。</p>
+</li>
+<li><p>每个对象中保存的只是一个虚函数表的指针，C++内部为每一个类维持一个虚函数表，该类的对象都指向这同一个虚函数表。</p>
+</li>
+<li><p>虚函数表中为什么就能准确查找相应的函数指针呢？因为在类设计的时候，虚函数表直接从基类也继承过来，如果覆盖了其中的某个虚函数，那么虚函数表的指针就会被替换，因此可以根据指针准确找到该调用哪个函数</p>
+<h3 id="七、指针和引用的区别"><a href="#七、指针和引用的区别" class="headerlink" title="七、指针和引用的区别"></a>七、指针和引用的区别</h3></li>
+<li><p>指针保存的是所指对象的地址，引用是所指对象的别名，</p>
+</li>
+<li><p>指针需要通过解引用间接访问，而引用是直接访问；</p>
+</li>
+<li><p>指针可以改变地址，从而改变所指的对象，而引用必须从一而终，总是指向最初获得的对象； </p>
+</li>
+<li><p>引用在定义的时候必须初始化，而指针则不需要； </p>
+</li>
+<li><p>指针有指向常量的指针和指针常量，而引用没有常量引用</p>
+<h3 id="八、内存对齐的原则"><a href="#八、内存对齐的原则" class="headerlink" title="八、内存对齐的原则"></a>八、内存对齐的原则</h3></li>
+</ul>
+<ol>
+<li><p>数据成员对齐规则：结构体（struct）的数据成员，第一个数据成员放在offset为0的地方，之后的每个数据成员存储的起始位置要从该成员大小的整数倍开始（比如int在32位机子上为4字节，所以要从4的整数倍地址开始存储）。</p>
+</li>
+<li><p>结构体作为成员：如果一个结构体里同时包含结构体成员，则结构体成员要从其内部最大元素大小的整数倍地址开始存储（如struct a里有struct b,b里有char,int ,double等元素，那么b应该从8(即double类型的大小)的整数倍开始存储）。</p>
+</li>
+<li><p>结构体的总大小：即sizeof的结果。在按之前的对齐原则计算出来的大小的基础上，必须还得是其内部最大成员的整数倍，不足的要补齐（如struct里最大为double，现在计算得到的已经是11，则总大小为16）</p>
+</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">c++</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/07/07/cpp-resume/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-threadpool" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/06/03/threadpool/">C++11线程池</a>
+    </h1>
+  
+
+        
+        <a href="/2020/06/03/threadpool/" class="archive-article-date">
+  	<time datetime="2020-06-03T09:58:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="使用c-11实现线程池"><a href="#使用c-11实现线程池" class="headerlink" title="使用c++11实现线程池"></a>使用c++11实现线程池</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line">ifndef THREAD_POOL_H</span><br><span class="line">#define THREAD_POOL_H</span><br><span class="line"></span><br><span class="line">#include &lt;vector&gt;</span><br><span class="line">#include &lt;queue&gt;</span><br><span class="line">#include &lt;memory&gt;</span><br><span class="line">#include &lt;thread&gt;</span><br><span class="line">#include &lt;mutex&gt;</span><br><span class="line">#include &lt;condition_variable&gt;</span><br><span class="line">#include &lt;future&gt;</span><br><span class="line">#include &lt;functional&gt;</span><br><span class="line">#include &lt;stdexcept&gt;</span><br><span class="line"></span><br><span class="line">class ThreadPool &#123;</span><br><span class="line">public:</span><br><span class="line">    ThreadPool(size_t);</span><br><span class="line">    template&lt;class F, class... Args&gt;</span><br><span class="line">    auto enqueue(F&amp;&amp; f, Args&amp;&amp;... args) </span><br><span class="line">        -&gt; std::future&lt;typename std::result_of&lt;F(Args...)&gt;::type&gt;;</span><br><span class="line">    ~ThreadPool();</span><br><span class="line">private:</span><br><span class="line">    &#x2F;&#x2F; need to keep track of threads so we can join them</span><br><span class="line">    std::vector&lt; std::thread &gt; workers;</span><br><span class="line">    &#x2F;&#x2F; the task queue</span><br><span class="line">    std::queue&lt; std::function&lt;void()&gt; &gt; tasks;</span><br><span class="line">    </span><br><span class="line">    &#x2F;&#x2F; synchronization</span><br><span class="line">    std::mutex queue_mutex;</span><br><span class="line">    std::condition_variable condition;</span><br><span class="line">    bool stop;</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line">&#x2F;&#x2F; the constructor just launches some amount of workers</span><br><span class="line">inline ThreadPool::ThreadPool(size_t threads)</span><br><span class="line">    :   stop(false)</span><br><span class="line">&#123;</span><br><span class="line">    for(size_t i &#x3D; 0;i&lt;threads;++i)</span><br><span class="line">        workers.emplace_back(</span><br><span class="line">            [this]</span><br><span class="line">            &#123;</span><br><span class="line">                for(;;)</span><br><span class="line">                &#123;</span><br><span class="line">                    std::function&lt;void()&gt; task;</span><br><span class="line"></span><br><span class="line">                    &#123;</span><br><span class="line">                        std::unique_lock&lt;std::mutex&gt; lock(this-&gt;queue_mutex);</span><br><span class="line">                        this-&gt;condition.wait(lock,</span><br><span class="line">                            [this]&#123; return this-&gt;stop || !this-&gt;tasks.empty(); &#125;);</span><br><span class="line">                        if(this-&gt;stop &amp;&amp; this-&gt;tasks.empty())</span><br><span class="line">                            return;</span><br><span class="line">                        task &#x3D; std::move(this-&gt;tasks.front());</span><br><span class="line">                        this-&gt;tasks.pop();</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    task();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; add new work item to the pool</span><br><span class="line">template&lt;class F, class... Args&gt;</span><br><span class="line">auto ThreadPool::enqueue(F&amp;&amp; f, Args&amp;&amp;... args) </span><br><span class="line">    -&gt; std::future&lt;typename std::result_of&lt;F(Args...)&gt;::type&gt;</span><br><span class="line">&#123;</span><br><span class="line">    using return_type &#x3D; typename std::result_of&lt;F(Args...)&gt;::type;</span><br><span class="line"></span><br><span class="line">    auto task &#x3D; std::make_shared&lt; std::packaged_task&lt;return_type()&gt; &gt;(</span><br><span class="line">            std::bind(std::forward&lt;F&gt;(f), std::forward&lt;Args&gt;(args)...)</span><br><span class="line">        );</span><br><span class="line">        </span><br><span class="line">    std::future&lt;return_type&gt; res &#x3D; task-&gt;get_future();</span><br><span class="line">    &#123;</span><br><span class="line">        std::unique_lock&lt;std::mutex&gt; lock(queue_mutex);</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F; don&#39;t allow enqueueing after stopping the pool</span><br><span class="line">        if(stop)</span><br><span class="line">            throw std::runtime_error(&quot;enqueue on stopped ThreadPool&quot;);</span><br><span class="line"></span><br><span class="line">        tasks.emplace([task]()&#123; (*task)(); &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    condition.notify_one();</span><br><span class="line">    return res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; the destructor joins all threads</span><br><span class="line">inline ThreadPool::~ThreadPool()</span><br><span class="line">&#123;</span><br><span class="line">    &#123;</span><br><span class="line">        std::unique_lock&lt;std::mutex&gt; lock(queue_mutex);</span><br><span class="line">        stop &#x3D; true;</span><br><span class="line">    &#125;</span><br><span class="line">    condition.notify_all();</span><br><span class="line">    for(std::thread &amp;worker: workers)</span><br><span class="line">        worker.join();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#endif</span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">c++</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/c//" class="article-tag-list-link color4">c++</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/06/03/threadpool/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-linux-thread" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -787,6 +1022,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">工具</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">c++</a>
               </li>
             
             <div class="clearfix"></div>
